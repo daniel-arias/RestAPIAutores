@@ -1,0 +1,24 @@
+{
+  "name": "restapiautores",
+  "version": "1.0.0",
+  "description": "rest api autores libros",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm run start",
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniel-arias/RestAPIAutores.git"
+  },
+  "author": "daniel jay leidy laura andres",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daniel-arias/RestAPIAutores/issues"
+  },
+  "homepage": "https://github.com/daniel-arias/RestAPIAutores#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
