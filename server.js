@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const server = express();
 
-const middlewares = require('./middlewares')
+const middlewares = require('./middlewares');
+const { autores } = require('./middlewares');
 
 server.listen(3000, () => {
     console.log('Start Server...');
@@ -54,4 +55,11 @@ server.post('/autores', middlewares.PostAutoresValidator , (req, resp) =>
 {
     const {body } = req;
     middlewares.autores.push(body);
+});
+
+server.delete('/autores/:id', (req, res) => {
+    const id = req.params.id;
+    const autor = autores.find(autor => autor.id.toString() === id.toString());
+    const index = autores.indexOf(autor);
+    autores.splice(index, 1);    
 });
