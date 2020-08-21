@@ -94,9 +94,26 @@ function PostAutoresValidator(req, res, next) {
         next();
 }
 
+// DELETE /autores/:id
+// - Si el autor no existe devuelve
+// - De lo contrario elimina el autor y devuelve ǽǻǿ
+function DeleteAutoresPorId(req, res, next)
+{
+    const {id} = req.params
+    if (!id) {        
+        res.status(400).send();
+    }
+    
+    if (autores.find(autor => autor.id === id)) {
+        res.status(400).send();        
+    }
+    next();
+}
+
 module.exports = {
     autores,
     GetAutoresValidator,
     PostAutoresValidator,
-    PostAutoresId
+    PostAutoresId,
+    DeleteAutoresPorId
 }
