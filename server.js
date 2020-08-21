@@ -63,3 +63,10 @@ server.post('/autores', PostAutoresValidator , (req, resp) =>
     const {body } = req;
     autores.push(body);
 });
+
+server.delete('/autores/:id', (req, res) => {
+    const id = req.params.id;
+    const autor = autores.find(autor => autor.id.toString() === id.toString());
+    const index = autores.indexOf(autor);
+    autores.splice(index, 1);
+});
