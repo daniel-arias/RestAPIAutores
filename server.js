@@ -2,8 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const server = express();
 
-const middlewares = require('./middlewares');
-const { autores } = require('./middlewares');
+// const middlewares = 
+const 
+{
+    autores, 
+    GetAutoresValidator,
+    PostAutoresValidator,
+    PostAutoresId
+} = require('./middlewares');
+
 
 server.listen(3000, () => {
     console.log('Start Server...');
@@ -31,8 +38,8 @@ server.get('/autores/:id/libros',(req,res)=>{
 /**
  * Devolver la lista de autores
  */
-server.get('/autores', middlewares.GetAutoresValidator, (req, res) => {
-    res.json(middlewares.autores);
+server.get('/autores', GetAutoresValidator, (req, res) => {
+    res.json(autores);
 });
 /**
  * Devolver autor con el id especificado o error
@@ -42,7 +49,7 @@ server.get('/autores' + '/:id', (req, res) => {
     if (isNaN(id)) {
         res.status(400).json({ error: 'Autor no encontrado. ID invalido' });
     } else {
-        const search = middlewares.autores.find(autor => autor.id.toString() === id.toString());
+        const search = autores.find(autor => autor.id.toString() === id.toString());
         if (search) {
             res.json(search);
         } else {
@@ -51,15 +58,8 @@ server.get('/autores' + '/:id', (req, res) => {
     }
 });
 
-server.post('/autores', middlewares.PostAutoresValidator , (req, resp) =>
+server.post('/autores', PostAutoresValidator , (req, resp) =>
 {
     const {body } = req;
-    middlewares.autores.push(body);
-});
-
-server.delete('/autores/:id', (req, res) => {
-    const id = req.params.id;
-    const autor = autores.find(autor => autor.id.toString() === id.toString());
-    const index = autores.indexOf(autor);
-    autores.splice(index, 1);    
+    autores.push(body);
 });
