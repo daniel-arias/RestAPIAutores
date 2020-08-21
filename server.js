@@ -22,12 +22,15 @@ function PostAutoresValidator(req, res, next)
 {
     const {body} = req;
     if (!body) {
-        next(err);
+        res.status(409)
+        .send('body vacio')
     }
     autores.forEach(autor => {
         if(autor.nombre === body.nombre && autor.apellido === body.apellido)
         {
-            next(err);
+            res.status(409)
+            .send('Autor ya registrado')
         }
     });
+    next();
 }
